@@ -1,8 +1,6 @@
-s = "greetings, friends."
+s = "Hello.World"
 
-if s[0].islower():
-    s = s[0].upper() + s[1:]
-if s[-1] != '.':
-    s = s + '.'
+s = s.replace(',', ' ').replace('.', ' ').strip().split(' ')[0]
 
 print(s)
+
