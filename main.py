@@ -1,31 +1,29 @@
-def count_occurrences(main_str: str, sub_str: str) -> int:
+def goes_after(word: str, first: str, second: str) -> bool:
     # your code here
-    i = 0
-    count = 0
-    while i <= len(main_str) and (len(sub_str) != 0):
-        k = main_str.lower().find(sub_str.lower(), i)
-        if k != -1:
-            count += 1
-            i = k + 1
+    if first == second or word.find(first) == -1 or word.find(second) == -1:
+        return False
+    else:
+        if word.find(first + second) == -1:
+            return False
         else:
-            break
-    return count
+            if word.find(first) != word.find(second) - 1:
+                return False
+            else:
+                return True
 
 
 print("Example:")
-print(count_occurrences("hello world hello", "hello"))
+print(goes_after("transport", "r", "t"))
 
 # These "asserts" are used for self-checking
-assert count_occurrences("hello world hello", "hello") == 2
-assert count_occurrences("Hello World hello", "hello") == 2
-assert count_occurrences("hello", "world") == 0
-assert count_occurrences("hello world hello world hello", "world") == 2
-assert count_occurrences("HELLO", "hello") == 1
-assert count_occurrences("appleappleapple", "appleapple") == 2
-assert count_occurrences("HELLO WORLD", "WORLD") == 1
-assert count_occurrences("hello world hello", "o w") == 1
-assert count_occurrences("apple apple apple", "apple") == 3
-assert count_occurrences("apple Apple apple", "apple") == 3
-assert count_occurrences("apple", "APPLE") == 1
+assert goes_after("world", "w", "o") == True
+assert goes_after("world", "w", "r") == False
+assert goes_after("world", "l", "o") == False
+assert goes_after("panorama", "a", "n") == True
+assert goes_after("list", "l", "o") == False
+assert goes_after("", "l", "o") == False
+assert goes_after("list", "l", "l") == False
+assert goes_after("world", "d", "w") == False
+assert goes_after("Almaz", "a", "l") == False
 
 print("The mission is done! Click 'Check Solution' to earn rewards!")
