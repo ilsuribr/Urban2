@@ -1,25 +1,31 @@
-def translation(text: str) -> str:
+def count_occurrences(main_str: str, sub_str: str) -> int:
     # your code here
-    list_text = list(text)
-
-    for i in range(len(list_text)):
-        if list_text[i] not in "aeiouy" and list_text[i] not in ('', ' '):
-            list_text[i + 1] = ''
-        elif list_text[i] in "aeiouy" and list_text[i] != '':
-            list_text[i + 1] = ''
-            list_text[i + 2] = ''
-
-    return ''.join(list_text)
+    i = 0
+    count = 0
+    while i <= len(main_str) and (len(sub_str) != 0):
+        k = main_str.lower().find(sub_str.lower(), i)
+        if k != -1:
+            count += 1
+            i = k + 1
+        else:
+            break
+    return count
 
 
 print("Example:")
-print(translation("hieeelalaooo"))
+print(count_occurrences("hello world hello", "hello"))
 
 # These "asserts" are used for self-checking
-assert translation("hieeelalaooo") == "hello"
-assert translation("hoooowe yyyooouuu duoooiiine") == "how you doin"
-assert translation("aaa bo cy da eee fe") == "a b c d e f"
-assert translation("sooooso aaaaaaaaa") == "sos aaa"
+assert count_occurrences("hello world hello", "hello") == 2
+assert count_occurrences("Hello World hello", "hello") == 2
+assert count_occurrences("hello", "world") == 0
+assert count_occurrences("hello world hello world hello", "world") == 2
+assert count_occurrences("HELLO", "hello") == 1
+assert count_occurrences("appleappleapple", "appleapple") == 2
+assert count_occurrences("HELLO WORLD", "WORLD") == 1
+assert count_occurrences("hello world hello", "o w") == 1
+assert count_occurrences("apple apple apple", "apple") == 3
+assert count_occurrences("apple Apple apple", "apple") == 3
+assert count_occurrences("apple", "APPLE") == 1
 
 print("The mission is done! Click 'Check Solution' to earn rewards!")
-
