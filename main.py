@@ -1,21 +1,12 @@
 def longest_prefix(arr: list[str]) -> str:
-    # your code here
-    pref = []
+    res = arr.pop()
+    l = len(res)
+    while arr:
+        sec, i = arr.pop(), 0
+        while i < min(l, len(sec)) and res[i] == sec[i]: i += 1
+        if not (l := i): return ""
 
-    for i in range(len(min(arr, key=len))):
-        set_pref = set()
-        for k in range(len(arr)):
-            set_pref.add(arr[k][i])
-        pref.append(set_pref)
-
-    prefix = ''
-    for i in range(len(pref)):
-        if len(pref[i]) == 1:
-            prefix += pref[i].pop()
-        else:
-            break
-
-    return prefix
+    return res[:l]
 
 
 print("Example:")
@@ -34,31 +25,5 @@ assert longest_prefix(["book", "boot", "booster"]) == "boo"
 assert longest_prefix(["short", "shore", "shot"]) == "sho"
 
 print("The mission is done! Click 'Check Solution' to earn rewards!")
-
-
-arr = ['aa', 'ba']
-
-pref = []
-
-for i in range(len(min(arr, key=len))):
-    set_pref = set()
-    for k in range(len(arr)):
-        set_pref.add(arr[k][i])
-    pref.append(set_pref)
-
-prefix = ''
-
-print(pref)
-
-for i in range(len(pref)):
-    if len(pref[i]) == 1:
-        prefix += pref[i].pop()
-    else:
-        break
-
-print(prefix)
-
-
-
 
 
