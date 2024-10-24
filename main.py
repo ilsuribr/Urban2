@@ -20,11 +20,5 @@ assert is_armstrong(4) == True
 
 print("The mission is done! Click 'Check Solution' to earn rewards!")
 
-num = 8208
-
-print(list(str(num)))
-
-print(sum(map(lambda x: int(x)**len(str(num)), list(str(num)))))
-
 
 
