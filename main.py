@@ -1,29 +1,30 @@
-def longest_prefix(arr: list[str]) -> str:
-    res = arr.pop()
-    l = len(res)
-    while arr:
-        sec, i = arr.pop(), 0
-        while i < min(l, len(sec)) and res[i] == sec[i]: i += 1
-        if not (l := i): return ""
-
-    return res[:l]
+def is_armstrong(num: int) -> bool:
+    # your code here
+    return sum(map(lambda x: int(x)**len(str(num)), list(str(num)))) == num
 
 
 print("Example:")
-print(repr(longest_prefix(["flower", "flow", "flight"])))
+print(is_armstrong(11))
 
 # These "asserts" are used for self-checking
-assert longest_prefix(["flower", "flow", "flight"]) == "fl"
-assert longest_prefix(["dog", "racecar", "car"]) == ""
-assert longest_prefix(["apple", "application", "appetizer"]) == "app"
-assert longest_prefix(["a"]) == "a"
-assert longest_prefix(["", "b"]) == ""
-assert longest_prefix(["same", "same", "same"]) == "same"
-assert longest_prefix(["mismatch", "mister", "miss"]) == "mis"
-assert longest_prefix(["alphabet", "alpha", "alphadog"]) == "alpha"
-assert longest_prefix(["book", "boot", "booster"]) == "boo"
-assert longest_prefix(["short", "shore", "shot"]) == "sho"
+assert is_armstrong(153) == True
+assert is_armstrong(370) == True
+assert is_armstrong(947) == False
+assert is_armstrong(371) == True
+assert is_armstrong(407) == True
+assert is_armstrong(163) == False
+assert is_armstrong(100) == False
+assert is_armstrong(8208) == True
+assert is_armstrong(930) == False
+assert is_armstrong(4) == True
 
 print("The mission is done! Click 'Check Solution' to earn rewards!")
+
+num = 8208
+
+print(list(str(num)))
+
+print(sum(map(lambda x: int(x)**len(str(num)), list(str(num)))))
+
 
 
