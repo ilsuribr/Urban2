@@ -1,35 +1,55 @@
-import re
-from datetime import datetime
+from collections.abc import Iterable
 
-
-def convert_date(date: str) -> str:
+def string_permutations(s: str) -> Iterable[str]:
     # your code here
-    try:
-        datetime.strptime(date, "%d/%m/%Y")
-        if re.fullmatch(r"\d{2}/\d{2}/\d{4}", date):
-            date = date.split('/')
-            date[0], date[2] = date[2], date[0]
-            return '-'.join(date)
-        else:
-            return "Error: Invalid date."
-    except ValueError:
-        return "Error: Invalid date."
+    if len(s) == 1:
+        return [s[0]]
+    elif len(s) == 2:
+        return [s[0]+s[1]] + [s[1]+s[0]]
+    elif len(s) == 3:
+        return ([s[0]+x for x in string_permutations(s[1:])] +
+                [s[1]+x for x in string_permutations(s[0]+s[2])] +
+                [s[2]+x for x in string_permutations(s[:2])])
+    elif len(s) == 4:
+        return ([s[0]+x for x in string_permutations(s[1:])] +
+                [s[1]+x for x in string_permutations(s[0]+s[2:])] +
+                [s[2]+x for x in string_permutations(s[:2]+s[3:])] +
+                [s[3]+x for x in string_permutations(s[:3])])
 
 
 print("Example:")
-print(convert_date("29/02/2019"))
+print(list(string_permutations("aab")))
 
 # These "asserts" are used for self-checking
-assert convert_date("25/12/2021") == "2021-12-25"
-assert convert_date("01/01/2000") == "2000-01-01"
-assert convert_date("15/06/1995") == "1995-06-15"
-assert convert_date("29/02/2020") == "2020-02-29"
-assert convert_date("10/10/2010") == "2010-10-10"
-assert convert_date("31/05/1985") == "1985-05-31"
-assert convert_date("07/08/1960") == "1960-08-07"
-assert convert_date("02/09/1999") == "1999-09-02"
-assert convert_date("30/04/1975") == "1975-04-30"
-assert convert_date("29/02/2019") == "Error: Invalid date."
-assert convert_date("30/04/1975/1") == "Error: Invalid date."
+assert list(string_permutations("ab")) == ["ab", "ba"]
+assert list(string_permutations("abc")) == ["abc", "acb", "bac", "bca", "cab", "cba"]
+assert list(string_permutations("a")) == ["a"]
+assert list(string_permutations("abcd")) == [
+    "abcd",
+    "abdc",
+    "acbd",
+    "acdb",
+    "adbc",
+    "adcb",
+    "bacd",
+    "badc",
+    "bcad",
+    "bcda",
+    "bdac",
+    "bdca",
+    "cabd",
+    "cadb",
+    "cbad",
+    "cbda",
+    "cdab",
+    "cdba",
+    "dabc",
+    "dacb",
+    "dbac",
+    "dbca",
+    "dcab",
+    "dcba",
+]
+assert list(string_permutations('aab')) == ['aab', 'aab', 'aba', 'aba', 'baa', 'baa']
 
 print("The mission is done! Click 'Check Solution' to earn rewards!")
