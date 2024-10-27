@@ -1,60 +1,29 @@
-from collections.abc import Iterable
-from itertools import permutations
-
-# def string_permutations(s: str) -> Iterable[str]:
-#     # your code here
-#     return sorted([''.join(x) for x in list((permutations(s)))])
-
-def string_permutations(s: str) -> Iterable[str]:
+def is_leap_year(year: int) -> bool:
     # your code here
-    if len(s) == 1:
-        return [s[0]]
-    elif len(s) == 2:
-        return sorted([s[0]+s[1]] + [s[1]+s[0]])
-    elif len(s) == 3:
-        return sorted([s[0]+x for x in string_permutations(s[1:])] +
-                      [s[1]+x for x in string_permutations(s[0]+s[2])] +
-                      [s[2]+x for x in string_permutations(s[:2])])
-    elif len(s) == 4:
-        return sorted(([s[0]+x for x in string_permutations(s[1:])] +
-                [s[1]+x for x in string_permutations(s[0]+s[2:])] +
-                [s[2]+x for x in string_permutations(s[:2]+s[3:])] +
-                [s[3]+x for x in string_permutations(s[:3])]))
+    if year % 400 == 0:
+        return True
+    elif year % 100 == 0:
+        return False
+    elif (year % 4 == 0):
+        return True
+    else:
+        return False
 
 
 print("Example:")
-print(list(string_permutations("aab")))
+print(is_leap_year(1891))
 
 # These "asserts" are used for self-checking
-assert list(string_permutations("ab")) == ["ab", "ba"]
-assert list(string_permutations("abc")) == ["abc", "acb", "bac", "bca", "cab", "cba"]
-assert list(string_permutations("a")) == ["a"]
-assert list(string_permutations("abcd")) == [
-    "abcd",
-    "abdc",
-    "acbd",
-    "acdb",
-    "adbc",
-    "adcb",
-    "bacd",
-    "badc",
-    "bcad",
-    "bcda",
-    "bdac",
-    "bdca",
-    "cabd",
-    "cadb",
-    "cbad",
-    "cbda",
-    "cdab",
-    "cdba",
-    "dabc",
-    "dacb",
-    "dbac",
-    "dbca",
-    "dcab",
-    "dcba",
-]
-assert list(string_permutations('aab')) == ['aab', 'aab', 'aba', 'aba', 'baa', 'baa']
+assert is_leap_year(2000) == True
+assert is_leap_year(1900) == False
+assert is_leap_year(2004) == True
+assert is_leap_year(2100) == False
+assert is_leap_year(2020) == True
+assert is_leap_year(2021) == False
+assert is_leap_year(1600) == True
+assert is_leap_year(1700) == False
+assert is_leap_year(1800) == False
+assert is_leap_year(2400) == True
 
 print("The mission is done! Click 'Check Solution' to earn rewards!")
+
