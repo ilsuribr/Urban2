@@ -1,20 +1,25 @@
 from collections.abc import Iterable
+from itertools import permutations
+
+# def string_permutations(s: str) -> Iterable[str]:
+#     # your code here
+#     return sorted([''.join(x) for x in list((permutations(s)))])
 
 def string_permutations(s: str) -> Iterable[str]:
     # your code here
     if len(s) == 1:
         return [s[0]]
     elif len(s) == 2:
-        return [s[0]+s[1]] + [s[1]+s[0]]
+        return sorted([s[0]+s[1]] + [s[1]+s[0]])
     elif len(s) == 3:
-        return ([s[0]+x for x in string_permutations(s[1:])] +
-                [s[1]+x for x in string_permutations(s[0]+s[2])] +
-                [s[2]+x for x in string_permutations(s[:2])])
+        return sorted([s[0]+x for x in string_permutations(s[1:])] +
+                      [s[1]+x for x in string_permutations(s[0]+s[2])] +
+                      [s[2]+x for x in string_permutations(s[:2])])
     elif len(s) == 4:
-        return ([s[0]+x for x in string_permutations(s[1:])] +
+        return sorted(([s[0]+x for x in string_permutations(s[1:])] +
                 [s[1]+x for x in string_permutations(s[0]+s[2:])] +
                 [s[2]+x for x in string_permutations(s[:2]+s[3:])] +
-                [s[3]+x for x in string_permutations(s[:3])])
+                [s[3]+x for x in string_permutations(s[:3])]))
 
 
 print("Example:")
