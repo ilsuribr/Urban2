@@ -8,7 +8,7 @@ def count_divisible(n: int, k: int) -> int:
 
 
 print("Example:")
-print(count_divisible(1000000000, 1000000000))
+print(count_divisible(10, 2))
 
 # These "asserts" are used for self-checking
 assert count_divisible(10, 2) == 5
