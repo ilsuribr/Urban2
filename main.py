@@ -1,31 +1,25 @@
-from collections.abc import Iterable
-from typing import Union
-
-
-def quadratic_roots(a: int, b: int, c: int) -> Iterable[Union[int | float] | str]:
+def count_divisible(n: int, k: int) -> int:
     # your code here
-    x1 = (-1 * b + (b ** 2 - 4 * a * c) ** 0.5) / (2 * a)
-    x2 = (-1 * b - (b ** 2 - 4 * a * c) ** 0.5) / (2 * a)
-
-    if type(x1) == complex or type(x2) == complex:
-        return ["No real roots"]
-    else:
-        return sorted([x1, x2], reverse=True)
+    count = 0
+    for i in range(1, n + 1):
+        if i % k == 0:
+            count += 1
+    return count
 
 
 print("Example:")
-print(list(quadratic_roots(1, 2, 3)))
+print(count_divisible(1000000000, 1000000000))
 
 # These "asserts" are used for self-checking
-assert list(quadratic_roots(1, -3, 2)) == [2, 1]
-assert list(quadratic_roots(1, 0, -1)) == [1, -1]
-assert list(quadratic_roots(1, 2, 1)) == [-1, -1]
-assert list(quadratic_roots(1, 0, 1)) == ["No real roots"]
-assert list(quadratic_roots(1, 4, 4)) == [-2, -2]
-assert list(quadratic_roots(1, -5, 6)) == [3, 2]
-assert list(quadratic_roots(1, -6, 9)) == [3, 3]
-assert list(quadratic_roots(2, 2, 1)) == ["No real roots"]
-assert list(quadratic_roots(2, -7, 6)) == [2, 1.5]
-assert list(quadratic_roots(2, -3, 1)) == [1, 0.5]
+assert count_divisible(10, 2) == 5
+assert count_divisible(10, 3) == 3
+assert count_divisible(10, 5) == 2
+assert count_divisible(15, 4) == 3
+assert count_divisible(20, 6) == 3
+assert count_divisible(100, 10) == 10
+assert count_divisible(200, 25) == 8
+assert count_divisible(50, 7) == 7
+assert count_divisible(60, 8) == 7
+assert count_divisible(70, 9) == 7
 
 print("The mission is done! Click 'Check Solution' to earn rewards!")
