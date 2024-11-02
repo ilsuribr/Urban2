@@ -1,7 +1,1 @@
-from collections import Counter
-
-names = ['Alice']
-
-name_counts = Counter('slkdufldhlsiejfjslkdjfl')
-
-print(name_counts['s'])
+print(max([1, 2, 3], key=lambda x: 1/x))
