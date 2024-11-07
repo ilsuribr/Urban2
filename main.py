@@ -1,29 +1,66 @@
-def longest_substr(s: str) -> int:
-    # your code here
-    count = 0
-    for i in range(len(s)):
-        set_s = set()
-        for j in range(i, len(s)):
-            if s[j] not in set_s:
-                set_s.add(s[j])
-            else:
-                break
-        if count < len(set_s):
-            count = len(set_s)
-
-    return count
+def calculate_structure_sum_re(data_structure):  # с помощью регулярных выражений и исключений
+    import re
+    list_ = re.findall(r'[a-zA-Z0-9]+', str(data_structure))
+    sum = 0
+    for i in list_:
+        try:
+            sum += int(i)
+        except:
+            sum += len(i)
+    return sum
 
 
-print("Example:")
-print(longest_substr("pwwkew"))
+def calculate_structure_sum_rec(data_structure): # с помощью рекурсии
+    if data_structure == '' or data_structure is None:
+        return 0
+    elif isinstance(data_structure, int):
+        return data_structure
+    elif isinstance(data_structure, str):
+        return len(data_structure)
+    elif isinstance(data_structure, list):
+        if len(data_structure) == 0:
+            return 0
+        elif len(data_structure) > 1:
+            return calculate_structure_sum_rec(data_structure[0]) + calculate_structure_sum_rec(data_structure[1:])
+        else:
+            return calculate_structure_sum_rec(data_structure[0])
+    elif isinstance(data_structure, tuple):
+        if len(data_structure) == 0:
+            return 0
+        elif len(data_structure) > 1:
+            return calculate_structure_sum_rec(data_structure[0]) + calculate_structure_sum_rec(data_structure[1:])
+        else:
+            return calculate_structure_sum_rec(data_structure[0])
+    elif isinstance(data_structure, set):
+        if len(data_structure) == 0:
+            return 0
+        elif len(data_structure) > 1:
+            return calculate_structure_sum_rec(list(data_structure)[0]) + calculate_structure_sum_rec(list(data_structure)[1:])
+        else:
+            return calculate_structure_sum_rec(list(data_structure)[0])
+    elif isinstance(data_structure, dict):
+        if len(data_structure) == 0:
+            return 0
+        elif len(data_structure) > 1:
+            return (calculate_structure_sum_rec(list(data_structure.keys())[0]) +
+                    calculate_structure_sum_rec(list(data_structure.keys())[1:]) +
+                    calculate_structure_sum_rec(list(data_structure.values())[0]) +
+                    calculate_structure_sum_rec(list(data_structure.values())[1:]))
+        else:
+            return calculate_structure_sum_rec(list(data_structure.keys())[0]) + calculate_structure_sum_rec(list(data_structure.values())[0])
 
-# These "asserts" are used for self-checking
-assert longest_substr("abcabcbb") == 3
-assert longest_substr("bbbbb") == 1
-assert longest_substr("pwwkew") == 3
-assert longest_substr("abcdef") == 6
-assert longest_substr("") == 0
-assert longest_substr("au") == 2
-assert longest_substr("dvdf") == 3
 
-print("The mission is done! Click 'Check Solution' to earn rewards!")
+
+data_structure = [
+    [1, 2, 3],
+    {'a': 4, 'b': 5},
+    (6, {'cube': 7, 'drum': 8}),
+    "Hello",
+    ((), [{(2, 'Urban', ('Urban2', 35))}])
+]
+
+result = calculate_structure_sum_re(data_structure)
+print(result)
+
+result = calculate_structure_sum_rec(data_structure)
+print(result)
