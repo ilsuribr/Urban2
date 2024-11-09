@@ -1,66 +1,20 @@
-def calculate_structure_sum_re(data_structure):  # с помощью регулярных выражений и исключений
-    import re
-    list_ = re.findall(r'[a-zA-Z0-9]+', str(data_structure))
-    sum = 0
-    for i in list_:
-        try:
-            sum += int(i)
-        except:
-            sum += len(i)
-    return sum
+def middle(text: str) -> str:
+    # replace this for solution
+    res = ""
+    if len(text) % 2 == 0:
+        res = text[(len(text) // 2) - 1] + text[(len(text) // 2)]
+    else:
+        res = text[(len(text) // 2)]
+
+    return res
 
 
-def calculate_structure_sum_rec(data_structure): # с помощью рекурсии
-    if data_structure == '' or data_structure is None:
-        return 0
-    elif isinstance(data_structure, int):
-        return data_structure
-    elif isinstance(data_structure, str):
-        return len(data_structure)
-    elif isinstance(data_structure, list):
-        if len(data_structure) == 0:
-            return 0
-        elif len(data_structure) > 1:
-            return calculate_structure_sum_rec(data_structure[0]) + calculate_structure_sum_rec(data_structure[1:])
-        else:
-            return calculate_structure_sum_rec(data_structure[0])
-    elif isinstance(data_structure, tuple):
-        if len(data_structure) == 0:
-            return 0
-        elif len(data_structure) > 1:
-            return calculate_structure_sum_rec(data_structure[0]) + calculate_structure_sum_rec(data_structure[1:])
-        else:
-            return calculate_structure_sum_rec(data_structure[0])
-    elif isinstance(data_structure, set):
-        if len(data_structure) == 0:
-            return 0
-        elif len(data_structure) > 1:
-            return calculate_structure_sum_rec(list(data_structure)[0]) + calculate_structure_sum_rec(list(data_structure)[1:])
-        else:
-            return calculate_structure_sum_rec(list(data_structure)[0])
-    elif isinstance(data_structure, dict):
-        if len(data_structure) == 0:
-            return 0
-        elif len(data_structure) > 1:
-            return (calculate_structure_sum_rec(list(data_structure.keys())[0]) +
-                    calculate_structure_sum_rec(list(data_structure.keys())[1:]) +
-                    calculate_structure_sum_rec(list(data_structure.values())[0]) +
-                    calculate_structure_sum_rec(list(data_structure.values())[1:]))
-        else:
-            return calculate_structure_sum_rec(list(data_structure.keys())[0]) + calculate_structure_sum_rec(list(data_structure.values())[0])
+print("Example:")
+print(middle("example"))
 
+# These "asserts" are used for self-checking
+assert middle("example") == "m"
+assert middle("test") == "es"
 
+print("The mission is done! Click 'Check Solution' to earn rewards!")
 
-data_structure = [
-    [1, 2, 3],
-    {'a': 4, 'b': 5},
-    (6, {'cube': 7, 'drum': 8}),
-    "Hello",
-    ((), [{(2, 'Urban', ('Urban2', 35))}])
-]
-
-result = calculate_structure_sum_re(data_structure)
-print(result)
-
-result = calculate_structure_sum_rec(data_structure)
-print(result)
