@@ -11,5 +11,8 @@ class House:
                 print(i)
 
 
-house = House('Акварель', 20)
-house.go_to(10)
+house1 = House('Акварель', 20)
+house1.go_to(10)
+
+house2 = House('Элитный', 30)
+house2.go_to(35)
