@@ -1,11 +1,9 @@
-x, n = (50, 5)
+import hashlib
 
-i = 1
-list_ = []
-while len(list_) < n:
-    if i % x == 0:
-        list_.append(i)
-    i += 1
+def hash_password(password: str) -> str:
+    # Преобразуем пароль в хэш-строку с использованием SHA-256
+    return hashlib.sha256(password.encode()).hexdigest()
 
-print(list_)
-print([i * x for i in range(1, n + 1)])
+# Пример регистрации пользователя
+stored_password_hash = hash_password("my_secure_password")  # Сохраняем хэш в базе
+print(f"Хэш пароля: {stored_password_hash}")
