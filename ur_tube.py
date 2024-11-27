@@ -24,9 +24,11 @@ class UrTube:
         self.users = []
         self.videos = []
 
-    def __contains__(self, user):
-        if isinstance(user, User):
-            return any(u.nickname == user.nickname for u in self.users)
+    def __contains__(self, item):
+        if isinstance(item, User):
+            return any(i.nickname == item.nickname for i in self.users)
+        if isinstance(item, Video):
+            return any(i.title == item.title for i in self.videos)
 
     def log_in(self, nickname, password):
         find = False
@@ -102,10 +104,11 @@ class Video:
 
 ur = UrTube()
 v1 = Video('Лучший язык программирования 2024 года', 200)
+v3 = Video('Лучший язык программирования 2024 года', 200)
 v2 = Video('Для чего девушкам парень программист?', 10, adult_mode=True)
 
 # Добавление видео
-ur.add(v1, v2)
+ur.add(v1, v2, v3)
 
 # Проверка поиска
 print(ur.get_videos('лучший'))
