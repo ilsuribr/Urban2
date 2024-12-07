@@ -15,7 +15,7 @@ class Figure:
         else:
             self.__sides = [1] * self.sides_count
 
-        self.filled = False
+        self.filled = True
 
     def get_color(self):
         return self.__color
