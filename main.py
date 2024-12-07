@@ -1,9 +1,13 @@
-import hashlib
+sides_count = 3
 
-def hash_password(password: str) -> str:
-    # Преобразуем пароль в хэш-строку с использованием SHA-256
-    return hashlib.sha256(password.encode()).hexdigest()
 
-# Пример регистрации пользователя
-stored_password_hash = hash_password("my_secure_password")  # Сохраняем хэш в базе
-print(f"Хэш пароля: {stored_password_hash}")
+def is_valid_sides(*args):
+    list_ = []
+
+    if all(x >= 0 and isinstance(x, int) for x in args) and sides_count == len(args):
+        list_ = list(args).copy()
+
+    return list_
+
+
+print(is_valid_sides(1, 2, 3))
