@@ -10,12 +10,9 @@ def custom_write(file_name: str, strings: list[str]) -> dict:
     with open(file_name, 'w', encoding='utf-8') as file:
         result_dict = {}
         line_number = 0
-        byte_number = 0
         for text in strings:
-            line_number += 1
-            byte_number = file.tell()
+            result_dict[(line_number := line_number + 1, file.tell())] = text
             file.write(text + '\n')
-            result_dict[(line_number, byte_number)] = text
 
     return result_dict
 
