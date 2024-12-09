@@ -37,7 +37,9 @@ class WordsFinder:
         return result
 
 
-finder2 = WordsFinder('file1.txt')
-print(finder2.get_all_words()) # Все слова
-print(finder2.find('TEXT')) # 3 слово по счёту
-print(finder2.count('teXT')) # 4 слова teXT в тексте всего
+
+finder1 = WordsFinder('Mother Goose - Monday’s Child.txt',)
+print(finder1.get_all_words())
+print(finder1.find('Child'))
+print(finder1.count('Child'))
+
