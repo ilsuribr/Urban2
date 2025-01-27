@@ -78,13 +78,3 @@ class TournamentTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-# runner1 = Runner('Усэйн', 10)
-# runner2 = Runner('Андрей', 9)
-# runner3 = Runner('Ник', 3)
-#
-# tour = Tournament(90, runner3, runner1, runner2)
-# result = tour.start()
-#
-# for k, v in result.items():
-#     print(k, v.name)
