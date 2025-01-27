@@ -32,7 +32,7 @@ class Tournament:
         finishers = {}
         place = 1
         while self.participants:
-            for participant in self.participants:
+            for participant in self.participants[:]:
                 participant.run()
                 if participant.distance >= self.full_distance:
                     finishers[place] = participant
@@ -55,19 +55,19 @@ class TournamentTest(unittest.TestCase):
     def test_start1(self):
         tour = Tournament(90, self.runner1, self.runner3)
         results = tour.start()
-        self.__class__.all_results['test1'] = results
+        self.all_results['test1'] = results
         self.assertTrue(results[len(results)] == 'Ник')
 
     def test_start2(self):
         tour = Tournament(90, self.runner2, self.runner3)
         results = tour.start()
-        self.__class__.all_results['test2'] = results
+        self.all_results['test2'] = results
         self.assertTrue(results[len(results)] == 'Ник')
 
     def test_start3(self):
         tour = Tournament(90, self.runner1, self.runner2, self.runner3)
         results = tour.start()
-        self.__class__.all_results['test3'] = results
+        self.all_results['test3'] = results
         self.assertTrue(results[len(results)] == 'Ник')
 
     @classmethod
