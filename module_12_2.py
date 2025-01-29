@@ -43,27 +43,33 @@ class Tournament:
 
 
 class TournamentTest(unittest.TestCase):
+    is_frozen = True
+
     @classmethod
     def setUpClass(cls):
         cls.all_results = {}
 
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def setUp(self):
         self.runner1 = Runner('Усэйн', 10)
         self.runner2 = Runner('Андрей', 9)
         self.runner3 = Runner('Ник', 3)
 
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_start1(self):
         tour = Tournament(90, self.runner1, self.runner3)
         results = tour.start()
         self.all_results['test1'] = results
         self.assertTrue(results[len(results)] == 'Ник')
 
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_start2(self):
         tour = Tournament(90, self.runner2, self.runner3)
         results = tour.start()
         self.all_results['test2'] = results
         self.assertTrue(results[len(results)] == 'Ник')
 
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_start3(self):
         tour = Tournament(90, self.runner1, self.runner2, self.runner3)
         results = tour.start()
